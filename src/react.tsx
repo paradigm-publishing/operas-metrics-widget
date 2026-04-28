@@ -38,4 +38,4 @@ export const MetricsWidget = ({
   </div>
 );
 
-export type { UserConfig, Config, Graph, Graphs, Scope, Tab };
+export type { Config, Graph, Graphs, Scope, Tab, UserConfig };

@@ -21,6 +21,7 @@ export const LineGraphTable: React.FC<LineGraphProps> = ({
         <tr>
           <th scope='col'>{t('graphs.line_graph.date_label')}</th>
           {datasets.map((dataset, datasetIndex) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: datasets may share labels; index disambiguates
             <th key={`${id}-head-${dataset.label}-${datasetIndex}`} scope='col'>
               {dataset.label}
             </th>
@@ -39,6 +40,7 @@ export const LineGraphTable: React.FC<LineGraphProps> = ({
               <th scope='row'>{label}</th>
               {datasets.map((dataset, datasetIndex) => (
                 <td
+                  // biome-ignore lint/suspicious/noArrayIndexKey: datasets may share labels; index disambiguates
                   key={`${dataset.label}-${safeLabel}-${occurrence}-${datasetIndex}`}
                 >
                   {formatNumber(dataset.data[index], config.settings.locale)}
@@ -52,6 +54,7 @@ export const LineGraphTable: React.FC<LineGraphProps> = ({
         <tr>
           <th scope='row'>{t('graphs.line_graph.total_label')}</th>
           {datasets.map((dataset, datasetIndex) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: datasets may share labels; index disambiguates
             <td key={`${id}-total-${dataset.label}-${datasetIndex}`}>
               {formatNumber(
                 dataset.data.reduce((a, b) => a + b, 0),

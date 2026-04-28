@@ -25,7 +25,9 @@ export const createDictionary = (config: Config): IntlDictionary => {
   // Loop through every `locales` file and add it to the dictionary
   for (const locale of locales) {
     // Import the locale file
-    const data = require(`../../locales/${locale}.json`);
+    const data = require<EncapsulatedStringObject>(
+      `../../locales/${locale}.json`
+    );
 
     // Convert the object to dot notation for much quicker lookups
     const dotNotation = toDotNotation(data);
