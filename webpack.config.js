@@ -52,6 +52,14 @@ module.exports = {
     ]
   },
   resolve: {
+    // Alias React to Preact in the embed bundle only. The npm package
+    // (webpack.npm.config.js) keeps React as a peer dep so consumers bring
+    // their own. This shaves ~45 KiB off every page that loads the embed.
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime'
+    },
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     plugins: [new TsconfigPathsPlugin()]
   },
