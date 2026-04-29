@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createCache, getCache, isCached, resolveCache } from './utils';
 
 interface HTTPRequestOptions {
@@ -27,11 +26,14 @@ export const HTTPRequest = async <T>(
       createCache(url);
     }
 
-    // Make the request
-    const { data } = await axios<T>({
-      method: method,
-      url: url
-    });
+    // Make the request. fetch() doesn't throw on 4xx/5xx — only on
+    // network errors — so we have to check `ok` ourselves to keep the
+    // throw-on-failure contract this function had under axios.
+    const response = await fetch(url, { method });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} ${response.statusText}`);
+    }
+    const data = (await response.json()) as T;
 
     // Update the cache
     if (shouldCache) {
