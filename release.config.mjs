@@ -40,11 +40,11 @@ if (!isLocalDryRun) {
   // next version without npm/GitHub auth or touching the working tree.
   plugins.push(
     ['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }],
-    // @semantic-release/npm bumps package.json + package-lock.json and
-    // publishes. Provenance is enabled via NPM_CONFIG_PROVENANCE=true in
-    // the release workflow (matches the trusted-publishing flow already
-    // used by the existing publish_npm CI job).
-    '@semantic-release/npm',
+    // Bump package.json's version but skip the npm publish step.
+    // @semantic-release/npm's verifyConditions requires NPM_TOKEN, which
+    // we don't have — the workflow uses npm trusted publishing (OIDC) via
+    // a separate `npm publish --provenance` step instead.
+    ['@semantic-release/npm', { npmPublish: false }],
     [
       '@semantic-release/github',
       {

@@ -8,6 +8,11 @@ on:
 env:
   NPM_CONFIG_FUND: "false"
   NPM_CONFIG_AUDIT: "false"
+  # Opt all JS-based actions into Node 24. GitHub is forcing the move on
+  # 2026-06-02; setting this now silences the deprecation warning emitted
+  # for actions/checkout@v4 + setup-node@v4 + pnpm/action-setup@v4 +
+  # cycjimmy/semantic-release-action@v4.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
   contents: read
@@ -56,27 +61,34 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
-      # The trusted-publishing flow expects modern npm; @semantic-release/npm
-      # invokes the `npm` binary directly regardless of which package manager
-      # we use, so this still applies under pnpm.
+      # Trusted publishing requires modern npm with the OIDC handshake.
       - name: Upgrade npm (for trusted publishing / provenance)
         run: npm install -g npm@latest
 
       - run: pnpm install --frozen-lockfile
 
-      # Build both bundles up front. The npm publish below reads dist/npm
+      # Build both bundles up front. `npm publish` below reads dist/npm
       # via the `files` field in package.json; the GCS upload reads dist/.
       - run: pnpm build
 
-      # semantic-release decides the next version, bumps package*.json, writes
-      # CHANGELOG.md, publishes to npm with provenance, creates the GitHub
-      # release, and pushes the [skip ci] commit + tag back to main.
+      # semantic-release computes the next version, bumps package.json,
+      # writes CHANGELOG.md, creates the GitHub release, and pushes the
+      # [skip ci] commit + tag back to main. It does NOT publish to npm
+      # here — its npm plugin requires NPM_TOKEN even with --provenance,
+      # so the publish runs as a separate step below using OIDC.
       - name: Run semantic-release
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: 'true'
+
+      # Trusted-publishing-driven npm publish. By the time this runs,
+      # semantic-release has bumped package.json's version. The id-token
+      # write permission on the job lets `npm publish --provenance`
+      # complete the OIDC handshake without an NPM_TOKEN.
+      - name: Publish to npm with provenance
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: npm publish --access public --provenance
 
       # Below: only when semantic-release actually minted a release.
       # `new_release_published` is exposed by cycjimmy/semantic-release-action.
