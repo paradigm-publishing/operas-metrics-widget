@@ -23,7 +23,7 @@ export const getAssetPath = (type: AssetType, path: string, config: Config) => {
   const directory = directoryMap(config)[type];
 
   // If in development, return the local path
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     return `/${directory.local}/${path}`;
   }
 

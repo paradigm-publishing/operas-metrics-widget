@@ -7,19 +7,13 @@
   // signature, but nothing imports the interface from outside the file.
   "ignoreExportsUsedInFile": true,
 
-  // scripts.eager.ts is swapped in for scripts.ts via webpack
-  // NormalModuleReplacementPlugin in the npm build — knip can't see that.
-  "entry": ["src/widget/config/graphs/scripts.eager.ts!"],
+  // Knip auto-detects src/entry.tsx from vite.config.ts but doesn't see
+  // vite.npm.config.ts; declare its entry explicitly.
+  "entry": ["src/react.tsx"],
 
   "ignoreDependencies": [
-    // Babel preset-env injects core-js / regenerator-runtime polyfills
-    // at build time; nothing imports them directly in source.
-    "core-js",
-    "regenerator-runtime",
-    // Aliased in for `react`/`react-dom` in webpack.config.js (embed bundle).
+    // Aliased in for `react`/`react-dom` in vite.config.ts (embed bundle).
     "preact",
-    // Selected dynamically in webpack.config.js based on NODE_ENV.
-    "style-loader",
     // Referenced as a preset string ("conventionalcommits") in
     // release.config.mjs, not by package name — knip can't see that.
     "conventional-changelog-conventionalcommits"

@@ -6,6 +6,13 @@ export interface IntlDictionary {
   [key: string]: Record<string, string>;
 }
 
+// Eagerly inlined at build time by Vite — every JSON file under
+// ../../locales/*.json ends up in the bundle as a static map, keyed by path.
+const localeModules = import.meta.glob<EncapsulatedStringObject>(
+  '../../locales/*.json',
+  { eager: true, import: 'default' }
+);
+
 // When adding new JSON locales, add them to this array
 // NB: The fallback language MUST be the first item in this array (usually 'en-US')
 // NBB: Because of how 2-character codes are imported, if a language has multiple locales,
@@ -24,10 +31,10 @@ export const createDictionary = (config: Config): IntlDictionary => {
 
   // Loop through every `locales` file and add it to the dictionary
   for (const locale of locales) {
-    // Import the locale file
-    const data = require<EncapsulatedStringObject>(
-      `../../locales/${locale}.json`
-    );
+    const data = localeModules[`../../locales/${locale}.json`];
+    if (!data) {
+      continue;
+    }
 
     // Convert the object to dot notation for much quicker lookups
     const dotNotation = toDotNotation(data);
