@@ -15,7 +15,7 @@ The OPERAS Metrics Widget is a small, embeddable metrics dashboard for scholarly
 The widget can be used in two ways:
 
 - as a script-tag embed that reads configuration from the page
-- as a React component distributed via npm (`@ubiquitypress/operas-metrics-widget`)
+- as a React component distributed via npm (`@paradigm-publishing/operas-metrics-widget`)
 
 In both cases, nearly all behavior is driven by configuration rather than code changes.
 
@@ -32,12 +32,12 @@ Implementing the widget requires:
 If you are using React, install and render the component directly (recommended for typed configs and bundler-friendly usage):
 
 ```bash
-npm install @ubiquitypress/operas-metrics-widget
+npm install @paradigm-publishing/operas-metrics-widget
 ```
 
 ```tsx
-import { MetricsWidget, type UserConfig } from '@ubiquitypress/operas-metrics-widget';
-import '@ubiquitypress/operas-metrics-widget/widget.css';
+import { MetricsWidget, type UserConfig } from '@paradigm-publishing/operas-metrics-widget';
+import '@paradigm-publishing/operas-metrics-widget/widget.css';
 
 const config: UserConfig = {
   // ... your configuration

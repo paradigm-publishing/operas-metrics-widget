@@ -1,7 +1,7 @@
 {
-  "name": "@ubiquitypress/operas-metrics-widget",
+  "name": "@paradigm-publishing/operas-metrics-widget",
   "version": "2.0.0",
-  "repository": "https://github.com/ubiquitypress/operas-metrics-widget.git",
+  "repository": "https://github.com/paradigm-publishing/operas-metrics-widget.git",
   "license": "MIT",
   "packageManager": "pnpm@11.1.1",
   "scripts": {
