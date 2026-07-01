@@ -135,6 +135,11 @@
       }
     }
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "single",

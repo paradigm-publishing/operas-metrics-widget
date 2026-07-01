@@ -1,7 +1,7 @@
 .table-row {
   display: table-row;
 
-  &:nth-child(2n-1) td {
+  &:nth-child(2n - 1) td {
     background: #f9f9f9;
 
     &:first-of-type {
