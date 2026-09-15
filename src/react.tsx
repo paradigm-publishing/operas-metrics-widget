@@ -39,4 +39,13 @@ export const MetricsWidget = ({
   </div>
 );
 
-export type { Config, Graph, GraphRowObject, Graphs, Scope, Tab, UserConfig };
+export type {
+  Config,
+  EventsMap,
+  Graph,
+  GraphRowObject,
+  Graphs,
+  Scope,
+  Tab,
+  UserConfig
+};

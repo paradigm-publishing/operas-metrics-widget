@@ -5,7 +5,8 @@
   "license": "MIT",
   "packageManager": "pnpm@11.9.0",
   "scripts": {
-    "check": "pnpm lint && pnpm typecheck && pnpm knip",
+    "assert:npm": "node scripts/assert-npm-entry.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm knip && pnpm build:npm && pnpm assert:npm",
     "dev": "vite",
     "build": "pnpm build:embed && pnpm build:npm && pnpm build:types",
     "build:embed": "vite build",
@@ -23,17 +24,21 @@
     "LICENSE",
     "readme.md"
   ],
+  "sideEffects": [
+    "./dist/npm/widget.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/npm/types/src/react.d.ts",
-      "import": "./dist/npm/index.js",
-      "require": "./dist/npm/index.js"
+      "import": "./dist/npm/index.mjs",
+      "require": "./dist/npm/index.cjs",
+      "default": "./dist/npm/index.cjs"
     },
     "./widget.css": "./dist/npm/widget.css"
   },
   "types": "./dist/npm/types/src/react.d.ts",
-  "main": "./dist/npm/index.js",
-  "module": "./dist/npm/index.js",
+  "main": "./dist/npm/index.cjs",
+  "module": "./dist/npm/index.mjs",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"

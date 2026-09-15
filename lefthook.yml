@@ -3,8 +3,7 @@
 #
 # Pre-commit: lint + format staged files only (fast).
 # Commit-msg: enforce conventional commits for semantic-release.
-# Pre-push: full check (lint, typecheck, knip) — catches type errors and
-# dead code before they reach CI.
+# Pre-push: full check (lint, typecheck, knip, npm entry assert).
 
 pre-commit:
   parallel: true
