@@ -46,6 +46,8 @@ const config: UserConfig = {
 export const Example = () => <MetricsWidget config={config} />;
 ```
 
+The React entry is safe to import from a server-rendered module. It renders a shell and fetches metrics in the browser. Chart.js and the Twitter widgets script load only when those graphs are shown.
+
 If you are not using React, use the HTML embed below.
 
 > Events in React: the component accepts an optional `events` prop with the same event names as the HTML embed. See [Events](#events) for examples.
@@ -783,7 +785,7 @@ Alternatively, the widget will still fully function even if you choose to not im
 
 ## Building
 
-1. Run `pnpm check` to lint, typecheck, and run knip.
+1. Run `pnpm check` to lint, typecheck, run knip, and assert the npm entry.
 2. Run `pnpm build`.
 
 This produces:
@@ -804,7 +806,7 @@ Releases are fully automated by [semantic-release](https://semantic-release.gitb
 
 ### What CI does on push to `main`
 
-1. **`check` job** — lint (biome), typecheck (tsc), and dead-code check (knip).
+1. **`check` job** — lint (biome), typecheck (tsc), dead-code check (knip), and the npm entry assert.
 2. **`release` job** — only runs if `check` passes:
     1. `pnpm build` produces both bundles.
     2. `semantic-release` inspects commits since the last `v*` tag, decides the next version, bumps `package.json`, writes `CHANGELOG.md`, creates the GitHub release + tag, and pushes a `chore(release): X.Y.Z [skip ci]` commit back to `main`. (`[skip ci]` keeps that push from triggering another release run.)

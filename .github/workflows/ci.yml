@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   check:
-    name: Lint, typecheck, knip
+    name: Lint, typecheck, knip, npm entry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
