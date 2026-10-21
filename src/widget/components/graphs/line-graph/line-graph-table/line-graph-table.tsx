@@ -57,7 +57,9 @@ export const LineGraphTable: React.FC<LineGraphProps> = ({
             // biome-ignore lint/suspicious/noArrayIndexKey: datasets may share labels; index disambiguates
             <td key={`${id}-total-${dataset.label}-${datasetIndex}`}>
               {formatNumber(
-                dataset.data.reduce((a, b) => a + b, 0),
+                graph.config?.cumulative === false
+                  ? dataset.data.reduce((a, b) => a + b, 0)
+                  : (dataset.data.at(-1) ?? 0),
                 config.settings.locale
               )}
             </td>

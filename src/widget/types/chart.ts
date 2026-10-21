@@ -37,6 +37,10 @@ export interface ChartTooltipContext {
 
 export interface ChartLegendOptions {
   display: boolean;
+  labels?: {
+    boxWidth: number;
+    padding: number;
+  };
 }
 
 export interface ChartScaleTickOptions {
