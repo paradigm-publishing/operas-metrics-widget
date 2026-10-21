@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/paradigm-publishing/operas-metrics-widget/compare/v2.0.5...v2.0.6) (2026-10-21)
+
+### Bug Fixes
+
+* **ci:** pin compatible changelog preset and validate release notes ([#6](https://github.com/paradigm-publishing/operas-metrics-widget/issues/6)) ([bcc2d18](https://github.com/paradigm-publishing/operas-metrics-widget/commit/bcc2d18190c5d894e26a92453a98678d2b26bfa5))
+* correct chart totals and keep mobile legends readable ([#5](https://github.com/paradigm-publishing/operas-metrics-widget/issues/5)) ([71351a0](https://github.com/paradigm-publishing/operas-metrics-widget/commit/71351a0dc4a510162666bff267c745fb5e40c378))
+
 ## [2.0.5](https://github.com/paradigm-publishing/operas-metrics-widget/compare/v2.0.4...v2.0.5) (2026-09-15)
 
 ## [2.0.4](https://github.com/paradigm-publishing/operas-metrics-widget/compare/v2.0.3...v2.0.4) (2026-07-01)
