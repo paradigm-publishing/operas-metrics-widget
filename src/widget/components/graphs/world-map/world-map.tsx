@@ -119,7 +119,7 @@ export const WorldMap = ({ id, data, graph }: WorldMapProps) => {
           height: graph.options?.height || graphDefaults.world_map.height || ''
         }}
       >
-        {/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative — accessible
+        {/* Decorative — accessible
             data is rendered in the sibling WorldMapTable. An <svg><title>
             shows as a native browser tooltip on hover and conflicts with the
             custom country tooltip below. */}
