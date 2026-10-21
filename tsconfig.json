@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "dom"],
@@ -20,10 +19,9 @@
     "resolveJsonModule": true,
 
     /* Absolute paths */
-    "baseUrl": ".",
     "paths": {
-      "@": ["src/widget"],
-      "@/*": ["src/widget/*"]
+      "@": ["./src/widget"],
+      "@/*": ["./src/widget/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"]
