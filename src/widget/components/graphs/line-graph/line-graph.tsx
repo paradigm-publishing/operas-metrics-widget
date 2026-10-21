@@ -134,7 +134,8 @@ export const LineGraph = (props: LineGraphProps) => {
         borderWidth: 1,
         plugins: {
           legend: {
-            display: datasets.length > 1 // Only show the legend if there are multiple datasets
+            display: datasets.length > 1, // Only show the legend if there are multiple datasets
+            labels: { boxWidth: 12, padding: 4 }
           },
 
           // Custom tooltip — mode 'index' captures every dataset at the
