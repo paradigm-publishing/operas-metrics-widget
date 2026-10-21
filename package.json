@@ -6,7 +6,8 @@
   "packageManager": "pnpm@11.9.0",
   "scripts": {
     "assert:npm": "node scripts/assert-npm-entry.mjs",
-    "check": "pnpm lint && pnpm typecheck && pnpm knip && pnpm build:npm && pnpm assert:npm",
+    "assert:release": "node scripts/assert-release-notes.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm knip && pnpm build:npm && pnpm assert:npm && pnpm assert:release",
     "dev": "vite",
     "build": "pnpm build:embed && pnpm build:npm && pnpm build:types",
     "build:embed": "vite build",
@@ -59,7 +60,7 @@
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
     "@vitejs/plugin-react": "^6.1.2",
-    "conventional-changelog-conventionalcommits": "^10.4.1",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
     "csstype": "^3.2.3",
     "knip": "^6.42.1",
     "lefthook": "^2.2.2",
